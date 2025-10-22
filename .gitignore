@@ -1,10 +1,25 @@
+# Node.js / UI5
 node_modules/
 dist/
-.scp/
+coverage/
+.tmp/
+.cache/
+
+# BAS / VSCode
+.vscode/
+.settings/
+*.code-workspace
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / Credentials
 .env
-Makefile*.mta
-mta_archives
-mta-*
-resources
-archive.zip
-.*_mta_build_tmp
+.env.local
