@@ -1,0 +1,78 @@
+<mvc:View controllerName="aprobadores.project2.controller.ContratoItem"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+  <Page id="_IDGenPage2" title="Ítems del Contrato" showFooter="true">
+    <content>
+      <!-- Encabezado del doctor (se completa por bindElement en el controller) -->
+      <ObjectHeader id="_IDGenObjectHeader"
+        title="Contrato {Ebeln}">
+        <attributes>
+          <ObjectAttribute id="_IDGenObjectAttribute1" title="Proveedor" text="{Lifnr}"/>
+          <ObjectAttribute id="_IDGenObjectAttribute2" title="Sociedad" text="{Bukrs}"/>
+          <ObjectAttribute id="_IDGenObjectAttribute3" title="Moneda" text="{Waers}"/>
+        </attributes>
+          <statuses>
+          <!-- total viene de un modelo local 'local' y se formatea con formatTotal -->
+          <ObjectStatus id="_IDGenObjectStatus" title="Total"
+                        text="{ parts:[{path:'local>/total'},{path:'Waers'}],
+                                formatter: '.formatTotal' }"/>
+        </statuses>
+      </ObjectHeader>
+
+      <Toolbar id="_IDGenToolbar" design="Auto">
+        <Title id="_IDGenTitle" text="Contratos item" level="H3"/>
+      </Toolbar>
+
+    <Table id="itemsList" inset="false"
+           items="{ path: '/ContratoItemSet' }">
+      <columns>
+        <Column id="_IDGenColumn4"><Text id="_IDGenText1" text="Posición"/></Column>
+        <Column id="_IDGenColumn5"><Text id="_IDGenText7" text="Material"/></Column>
+        <Column id="_IDGenColumn6"><Text id="_IDGenText8" text="Texto Breve"/></Column>
+        <Column id="_IDGenColumn21"><Text id="_IDGenText22" text="Cantidad"/></Column>
+        <Column id="_IDGenColumn23"><Text id="_IDGenText24" text="Unidad de medida"/></Column>
+        <Column id="_IDGenColumn25"><Text id="_IDGenText26" text="Precio neto uni"/></Column>
+        <Column id="_IDGenColumn27"><Text id="_IDGenText28" text="Cantidad Base"/></Column>
+        <Column id="_IDGenColumn29"><Text id="_IDGenText30" text="Precio neto uni"/></Column>
+      </columns>
+      <items>
+        <ColumnListItem id="_IDGenColumnListItem1">
+          <cells>
+            <Text id="_IDGenText17" text="{Ebelp}"/>
+            <Text id="_IDGenText10" text="{Matnr}"/>
+            <Text id="_IDGenText11" text="{Txz01}"/>
+            <Text id="_IDGenText12" text="{Menge}"/>
+            <Text id="_IDGenText13" text="{Meins}"/>
+            <Text id="_IDGenText14" text="{Netpr}"/>
+            <Text id="_IDGenText15" text="{Peinh}"/>
+            <Text id="_IDGenText16" text="{Netwrpos}"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+
+    </content>
+      <footer>
+      <Toolbar id="_IDGenToolbar2">
+        <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+        <Button id="_IDGenButton" text="Liberar" type="Emphasized" press=".onLiberar"/>
+      </Toolbar>
+  </footer>
+    <!-- Diálogo para el código de liberación -->
+  <Dialog id="dlgRelease" title="Ingresar código de liberación">
+    <content>
+      <!-- simple: input; si querés Select, cambiamos a <Select> -->
+      <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+        <Label id="_IDGenLabel" text="Código"/>
+        <Input id="inpRelease" value="{local>/releaseCode}" liveChange=".onReleaseChange"/>
+      </VBox>
+    </content>
+    <beginButton>
+      <Button id="_IDGenButton1" text="Confirmar" type="Accept" press=".onConfirmRelease"/>
+    </beginButton>
+    <endButton>
+      <Button id="_IDGenButton2" text="Cancelar" press=".onCancelRelease"/>
+    </endButton>
+  </Dialog>
+  </Page>
+</mvc:View>

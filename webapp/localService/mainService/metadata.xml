@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZAPROBADOR_CONTRATOS_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Contrato" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Ebeln"/>
+                </Key>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Doc.compras" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Proveedor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ekorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Org.compras" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ekgrp" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Grupo compras" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bedat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Fecha de pedido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Moneda" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Frgke" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Ind.liber." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Frgzu" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Estado-liberac." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Loekz" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Indicador borrado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToContratoItemSet" Relationship="ZAPROBADOR_CONTRATOS_SRV.Assoc_Contrato_To_Contrato_Item" FromRole="FromRole_Assoc_Contrato_To_Contrato_Item" ToRole="ToRole_Assoc_Contrato_To_Contrato_Item"/>
+            </EntityType>
+            <EntityType Name="Contrato_item" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Ebeln"/>
+                    <PropertyRef Name="Ebelp"/>
+                </Key>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Doc.compras" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ebelp" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Posición" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Txz01" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Txt.brv." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Menge" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Cantidad pedido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="UM base" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Netpr" Type="Edm.Decimal" Nullable="false" Precision="12" Scale="3" sap:unicode="false" sap:label="Precio neto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Peinh" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="0" sap:unicode="false" sap:label="Cantidad base" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Netwrpos" Type="Edm.Decimal" Nullable="false" Precision="12" Scale="3" sap:unicode="false" sap:label="Precio neto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Operacion" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Ebeln"/>
+                </Key>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Accion" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Comentario" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Assoc_Contrato_To_Contrato_Item" sap:content-version="1">
+                <End Type="ZAPROBADOR_CONTRATOS_SRV.Contrato" Multiplicity="1" Role="FromRole_Assoc_Contrato_To_Contrato_Item"/>
+                <End Type="ZAPROBADOR_CONTRATOS_SRV.Contrato_item" Multiplicity="*" Role="ToRole_Assoc_Contrato_To_Contrato_Item"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Assoc_Contrato_To_Contrato_Item">
+                        <PropertyRef Name="Ebeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Assoc_Contrato_To_Contrato_Item">
+                        <PropertyRef Name="Ebeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZAPROBADOR_CONTRATOS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ContratoSet" EntityType="ZAPROBADOR_CONTRATOS_SRV.Contrato" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ContratoItemSet" EntityType="ZAPROBADOR_CONTRATOS_SRV.Contrato_item" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="OperacionSet" EntityType="ZAPROBADOR_CONTRATOS_SRV.Operacion" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="Assoc_Contrato_To_Contrato_ItemSet" Association="ZAPROBADOR_CONTRATOS_SRV.Assoc_Contrato_To_Contrato_Item" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContratoSet" Role="FromRole_Assoc_Contrato_To_Contrato_Item"/>
+                    <End EntitySet="ContratoItemSet" Role="ToRole_Assoc_Contrato_To_Contrato_Item"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hs04.eastus2.cloudapp.azure.com:8000/sap/opu/odata/sap/ZAPROBADOR_CONTRATOS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hs04.eastus2.cloudapp.azure.com:8000/sap/opu/odata/sap/ZAPROBADOR_CONTRATOS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

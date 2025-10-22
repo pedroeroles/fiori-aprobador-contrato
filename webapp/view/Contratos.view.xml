@@ -1,0 +1,27 @@
+<mvc:View controllerName="aprobadores.project2.controller.Contratos"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+    <content>
+<Table id="tblContratos" items="{/ContratoSet}">
+  <columns>
+    <Column id="_IDGenColumn1" vAlign="Middle"><Text id="_IDGenText" text="Contrato"/></Column>
+    <Column id="_IDGenColumn2" vAlign="Middle"><Text id="_IDGenText2" text="Sociedad"/></Column>
+    <Column id="_IDGenColumn3" vAlign="Middle"><Text id="_IDGenText3" text="Proveedor"/></Column>
+    <Column id="_IDGenColumn7" vAlign="Middle"><Text id="_IDGenText4" text="Precio Previsto"/></Column>
+  </columns>
+  <items>
+    <!-- El press va en el item -->
+    <ColumnListItem id="_IDGenColumnListItem" type="Active" press=".onContratoPress">
+      <cells>
+        <Text id="_IDGenText5" text="{Ebeln}"/>
+        <Text id="_IDGenText6" text="{Bukrs}"/>
+        <Text id="_IDGenText9" text="{Lifnr} {Name1}"/>
+        <Text id="_IDGenText18" text="{Ktwrt} {Waers}"/>
+      </cells>
+    </ColumnListItem>
+  </items>
+</Table>
+    </content>
+    </Page>
+</mvc:View>

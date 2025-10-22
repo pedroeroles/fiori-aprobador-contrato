@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: aprobadores.project2
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: Prueba
+          url: http://STKS4HS04.eastus2.cloudapp.azure.com:8000
+          client: '410'
+        app:
+          name: APROBADORES
+          package: $TMP
+          transport: ''
+        exclude:
+          - /test/
