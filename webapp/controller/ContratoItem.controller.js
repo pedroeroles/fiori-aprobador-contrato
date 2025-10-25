@@ -8,74 +8,48 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("aprobadores.project2.controller.ContratoItem", {
-
-    onInit: function () {
-      // ⬅️ modelo local para el total
-      this.getView().setModel(new JSONModel({ total: 0 }), "local");
-
-      this.getOwnerComponent()
-        .getRouter()
+   onInit: function () {
+      this.getOwnerComponent().getRouter()
         .getRoute("ContratoItem")
         .attachPatternMatched(this._onMatched, this);
     },
 
     _onMatched: function (oEvent) {
-      const Ebeln = oEvent.getParameter("arguments").Ebeln;
+      const sEbeln = oEvent.getParameter("arguments").Ebeln;
       const oView = this.getView();
-
-      // Header del contrato (traé también WAERS si lo tenés)
-      oView.bindElement(`/ContratoSet(Ebeln='${Ebeln}')`);
-
-      // Tabla de ítems filtrada por contrato
-      const oTable = this.byId("itemsList");
-      oTable.unbindItems(); // por si venís de otro contrato
-      oTable.bindItems({
-        path: "/ContratoItemSet",
-        filters: [ new Filter("Ebeln", FilterOperator.EQ, Ebeln) ],
-        template: new sap.m.ColumnListItem({
-          cells: [
-            new sap.m.Text({ text: "{Ebelp}" }),
-            new sap.m.Text({ text: "{Matnr}" }),
-            new sap.m.Text({ text: "{Txz01}" }),
-            new sap.m.Text({ text: "{Menge}" }),
-            new sap.m.Text({ text: "{Meins}" }),
-            new sap.m.Text({ text: "{Netpr}" }),
-            new sap.m.Text({ text: "{Peinh}" }),
-            new sap.m.Text({ text: "{Netwrpos}" })
-          ]
-        })
-      });
-
-      // ⬅️ recalcular total cuando cargue la tabla
-      oTable.attachUpdateFinished(this._calcTotal, this);
+      oView.bindElement(`/ContratoSet(Ebeln='${sEbeln}')`);
+      // La tabla ya filtra por Ebeln en la view (XML)
     },
 
-    _calcTotal: function () {
-      const oTable = this.byId("itemsList");
-      let total = 0;
+    onRelease: function () {
+      const oCtx = this.getView().getBindingContext();
+      if (!oCtx) return;
+      const sEbeln = oCtx.getProperty("Ebeln");
 
-      oTable.getItems().forEach((oItem) => {
-        const ctx = oItem.getBindingContext();
-        // Si tenés importe por posición, usalo:
-        let pos = Number(ctx.getProperty("Netwrpos"));
-        if (isNaN(pos)) {
-          // fallback: Netpr * Menge / Peinh
-          const netpr = Number(ctx.getProperty("Netpr"))  || 0;
-          const menge = Number(ctx.getProperty("Menge"))  || 0;
-          const peinh = Number(ctx.getProperty("Peinh"))  || 1;
-          pos = (netpr * menge) / (peinh || 1);
-        }
-        total += pos;
+      const oModel = this.getView().getModel();
+      const oPayload = { Ebeln: sEbeln /* , Frgco: 'XX' */ };
+
+      oModel.create("/ReleaseActionSet", oPayload, {
+        success: () => MessageToast.show("Contrato liberado"),
+        error: () => MessageToast.show("Error al liberar el contrato")
       });
-
-      this.getView().getModel("local").setProperty("/total", total);
     },
 
-    // Opcional: formateo 2 decimales + moneda
-    formatTotal: function (total, waers) {
-      if (total == null) return "";
-      const n = new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(total);
-      return waers ? `${n} ${waers}` : n;
+    formatEstadoColor: function (s) {
+      switch (s) {
+        case "Pendiente": return "Warning";
+        case "Liberado":  return "Success";
+        case "Rechazado": return "Error";
+        default:          return "None";
+      }
+    },
+    formatEstadoIcon: function (s) {
+      switch (s) {
+        case "Pendiente": return "sap-icon://pending";
+        case "Liberado":  return "sap-icon://accept";
+        case "Rechazado": return "sap-icon://decline";
+        default:          return "sap-icon://document-text";
+      }
     }
   });
 });

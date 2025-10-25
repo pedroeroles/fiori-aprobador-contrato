@@ -88,11 +88,15 @@
       },
       "routes": [
         { "pattern": "",                 "name": "Contratos",    "target": "Contratos" },
-        { "pattern": "contrato/{Ebeln}", "name": "ContratoItem", "target": "ContratoItem" }
+        { "pattern": "ContratoItem/{Ebeln}", "name": "ContratoItem", "target": "ContratoItem" }
       ],
       "targets": {
-        "Contratos":    { "viewName": "Contratos" },
-        "ContratoItem": { "viewName": "ContratoItem" }
+        "Contratos":    { "viewName": "Contratos", "viewId": "Contratos", "viewLevel":1 },
+        "ContratoItem": { 
+            "viewName": "ContratoItem",
+            "viewId": "ContratoItem",
+            "viewLevel": 2
+         }
       }
     },
     "rootView": {
