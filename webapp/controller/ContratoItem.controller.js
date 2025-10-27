@@ -15,10 +15,31 @@ sap.ui.define([
     },
 
     _onMatched: function (oEvent) {
-      const sEbeln = oEvent.getParameter("arguments").Ebeln;
+      const Ebeln = oEvent.getParameter("arguments").Ebeln;
       const oView = this.getView();
-      oView.bindElement(`/ContratoSet(Ebeln='${sEbeln}')`);
-      // La tabla ya filtra por Ebeln en la view (XML)
+
+      oView.bindElement(`/ContratoSet(Ebeln='${Ebeln}')`);
+  // Bind y forzamos lectura al backend
+
+      // Tabla de ítems filtrada por contrato
+      const oTable = this.byId("itemsList");
+      oTable.unbindItems(); // por si venís de otro contrato
+      oTable.bindItems({
+        path: "/ContratoItemSet",
+        filters: [ new Filter("Ebeln", FilterOperator.EQ, Ebeln) ],
+        template: new sap.m.ColumnListItem({
+          cells: [
+            new sap.m.Text({ text: "{Ebelp}" }),
+            new sap.m.Text({ text: "{Matnr}" }),
+            new sap.m.Text({ text: "{Txz01}" }),
+            new sap.m.Text({ text: "{Menge}" }),
+            new sap.m.Text({ text: "{Meins}" }),
+            new sap.m.Text({ text: "{Netpr}" }),
+            new sap.m.Text({ text: "{Peinh}" }),
+            new sap.m.Text({ text: "{Netwrpos}" })
+          ]
+        })
+      });
     },
 
     onRelease: function () {
@@ -30,7 +51,7 @@ sap.ui.define([
       const oPayload = { Ebeln: sEbeln /* , Frgco: 'XX' */ };
 
       oModel.create("/ReleaseActionSet", oPayload, {
-        success: () => MessageToast.show("Contrato liberado"),
+        success: () => MessageToast.show(`Contrato ${sEbeln} liberado con éxito`, { duration: 3000 }),
         error: () => MessageToast.show("Error al liberar el contrato")
       });
     },

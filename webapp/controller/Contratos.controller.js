@@ -8,16 +8,23 @@ function (Controller, MessageToast) {
 
     return Controller.extend("aprobadores.project2.controller.Contratos", {
     onInit: function () {
-      var oHeader = new sap.ui.model.json.JSONModel();
-      oHeader.setData({
-        approverName: "Pedro Eroles",
-        pendingCount: 0,
-        releaseGroup: "K1"
-      });
-              
-      this.getView().setModel(oHeader, "header");
-      this._refreshHeaderCount();
-    },
+    // Mejor: importá JSONModel en sap.ui.define; si no, esto funciona igual:
+    var oHeader = new sap.ui.model.json.JSONModel({
+      approverName: "Pedro Eroles",
+      pendingCount: 0,
+      releaseGroup: "K1"
+    });
+    this.getView().setModel(oHeader, "header");
+
+    const oList = this.byId("listContratos");
+    oList.attachUpdateFinished((oEvent) => {
+      const oModelHeader = this.getView().getModel("header");
+      // total viene del backend; si no está, usamos el length del binding
+      const iTotal = oEvent.getParameter("total");
+      const iLen = oList.getBinding("items")?.getLength?.() ?? 0;
+      oModelHeader.setProperty("/pendingCount", Number.isInteger(iTotal) ? iTotal : iLen);
+    });
+  },
 
     _refreshHeaderCount: function () {
       const oList = this.byId("listContratos");
