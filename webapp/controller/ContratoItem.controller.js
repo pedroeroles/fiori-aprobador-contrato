@@ -8,18 +8,21 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("aprobadores.project2.controller.ContratoItem", {
-   onInit: function () {
+    onInit: function () {
       this.getOwnerComponent().getRouter()
         .getRoute("ContratoItem")
         .attachPatternMatched(this._onMatched, this);
     },
 
+    //_onMatched: function (oEvent) {
+    //  const Ebeln = oEvent.getParameter("arguments").Ebeln;
+    //  const oView = this.getView();
+
     _onMatched: function (oEvent) {
       const Ebeln = oEvent.getParameter("arguments").Ebeln;
-      const oView = this.getView();
-
-      oView.bindElement(`/ContratoSet(Ebeln='${Ebeln}')`);
-  // Bind y forzamos lectura al backend
+      this.getView().bindElement({
+        path: `/ContratoSet(Ebeln='${Ebeln}')`
+    });
 
       // Tabla de ítems filtrada por contrato
       const oTable = this.byId("itemsList");
@@ -54,6 +57,12 @@ sap.ui.define([
         success: () => MessageToast.show(`Contrato ${sEbeln} liberado con éxito`, { duration: 3000 }),
         error: () => MessageToast.show("Error al liberar el contrato")
       });
+    },
+
+    formatProveedor: function (sLifnr, sName1) {
+      if (!sLifnr && !sName1) return "";
+      if (sLifnr && sName1) return `${sLifnr} - ${sName1}`;
+      return sLifnr || sName1; // si falta alguno
     },
 
     formatEstadoColor: function (s) {

@@ -3,13 +3,18 @@
     xmlns="sap.m">
   <Page id="_IDGenPage2" title="Ítems del Contrato" showFooter="true">
 <content>
-      <!-- Encabezado del contrato 
       <ObjectHeader id="_IDGenObjectHeader"
         title="Contrato {Ebeln}"
         icon="{path: 'EstadoLiberacion', formatter: '.formatEstadoIcon'}"
         number="{MontoTotal}" numberUnit="{Moneda}">
         <attributes>
-          <ObjectAttribute id="_IDGenObjectAttribute" title="Proveedor" text="{path: 'Lifnr'} {path: 'Name1'}"/>
+          <ObjectAttribute id="_IDGenObjectAttribute" title="Proveedor" text="{
+            parts: [
+              {path: 'Lifnr'},
+              {path: 'Name1'}
+            ],
+            formatter: '.formatProveedor'
+          }"/>
           <ObjectAttribute id="_IDGenObjectAttribute1" title="Estado" text="{EstadoLiberacion}"/>
         </attributes>
         <statuses>
@@ -17,15 +22,6 @@
             text="{EstadoLiberacion}"
             state="{path: 'EstadoLiberacion', formatter: '.formatEstadoColor'}"/>
         </statuses>
-      </ObjectHeader>
-        -->
-      <ObjectHeader id="_IDGenObjectHeader1"
-        title="Contrato {Ebeln}"
-        icon="{path: 'EstadoLiberacion', formatter: '.formatEstadoIcon'}">
-        <attributes>
-          <ObjectAttribute id="_IDGenObjectAttribute" title="Proveedor" text="{parts: ['Lifnr', 'Name1'], formatter: '.formatProveedor'}"/>
-          <ObjectAttribute id="_IDGenObjectAttribute2" title="Estado" text="{path: 'EstadoLiberacion'}"/>
-        </attributes>
       </ObjectHeader>
       <!-- Ítems -->
       <Table id="itemsList" inset="false"
