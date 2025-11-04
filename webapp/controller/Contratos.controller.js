@@ -29,7 +29,7 @@ function (Controller, MessageToast, formatter) {
 
       //const iLen = oList.getBinding("items")?.getLength?.() ?? 0;
 
-      //oModelHeader.setProperty("/pendingCount", Number.isInteger(iTotal) ? iTotal : iLen);
+      oModelHeader.setProperty("/pendingCount", Number.isInteger(iTotal) ? iTotal : iLen);
       const aItems = oList.getItems();
       if (aItems.length > 0) {
         const oContext = aItems[0].getBindingContext();
@@ -88,22 +88,40 @@ function (Controller, MessageToast, formatter) {
       this.getOwnerComponent().getRouter().navTo("ContratoItem", { Ebeln: sEbeln });
     },
 
-    onReleaseSelected: function () {
-      const oItem = this.byId("listContratos").getSelectedItem();
-      if (!oItem) return MessageToast.show("Seleccioná un contrato");
-      const oCtx = oItem.getBindingContext();
-      const sEbeln = oCtx.getProperty("Ebeln");
+    onRelease: function () {
+      const oList = this.byId("listContratos");
+      const oSelectedItem = oList.getSelectedItem();
 
-      // Llamada básica al backend (suponiendo EntitySet ReleaseActionSet)
+      if (!oSelectedItem) {
+        sap.m.MessageToast.show("Seleccione un contrato para liberar");
+        return;
+      }
+
+      // Obtener el contexto del contrato seleccionado
+      const oContext = oSelectedItem.getBindingContext();
+      const sEbeln = oContext.getProperty("Ebeln");
+
       const oModel = this.getView().getModel();
-      const oPayload = { Ebeln: sEbeln /*, Frgco: 'XX' */ };
+      const oEntry = { Ebeln: sEbeln, Accion: "LIBERAR" };
 
-      oModel.create("/ReleaseActionSet", oPayload, {
-        success: () => {
-          MessageToast.show("Contrato liberado");
-          this.onRefresh();
-        },
-        error: () => MessageToast.show("No se pudo liberar el contrato")
+      oModel.create("/OperacionSet", oEntry, {
+        success: function (oData) {
+        sap.ui.core.BusyIndicator.hide();
+        sap.m.MessageToast.show(oData.Resultado || "Contrato liberado con éxito");
+
+        // Refrescar modelo OData (lista)
+        oModel.refresh(true);
+
+        // Actualizar contador header
+        const oList = this.byId("idContratosList");
+        const iCount = oList.getItems().length;
+        const oHeaderModel = this.getView().getModel("header");
+        oHeaderModel.setProperty("/pendingCount", iCount);
+      }.bind(this),
+        error: function (oError) {
+          sap.ui.core.BusyIndicator.hide();
+          sap.m.MessageBox.error("Error al liberar el contrato");
+        }
       });
     },
 

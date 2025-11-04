@@ -32,7 +32,7 @@
           <SearchField id="_IDGenSearchField" width="18rem" liveChange=".onSearch" placeholder="Buscar por N° de contrato..."/>
           <Button id="_IDGenButton3" icon="sap-icon://refresh" tooltip="Actualizar" press=".onRefresh"/>
           <Button id="_IDGenButton4" icon="sap-icon://detail-view" tooltip="Ver detalle" press=".onNavToDetail" type="Transparent"/>
-          <Button id="_IDGenButton5" icon="sap-icon://accept" tooltip="Liberar" press=".onReleaseSelected" type="Accept"/>
+          <Button id="_IDGenButton5" icon="sap-icon://accept" tooltip="Liberar" press=".onRelease" type="Accept"/>
         </OverflowToolbar>
       </VBox>
 

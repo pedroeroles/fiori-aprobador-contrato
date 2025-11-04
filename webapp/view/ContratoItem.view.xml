@@ -3,22 +3,6 @@
     xmlns="sap.m">
   <Page id="_IDGenPage2" title="Ítems del Contrato" showFooter="true">
 <content>
-      <!-- Encabezado del contrato 
-      <ObjectHeader id="_IDGenObjectHeader"
-        title="Contrato {Ebeln}"
-        icon="{path: 'EstadoLiberacion', formatter: '.formatEstadoIcon'}"
-        number="{MontoTotal}" numberUnit="{Moneda}">
-        <attributes>
-          <ObjectAttribute id="_IDGenObjectAttribute" title="Proveedor" text="{path: 'Lifnr'} {path: 'Name1'}"/>
-          <ObjectAttribute id="_IDGenObjectAttribute1" title="Estado" text="{EstadoLiberacion}"/>
-        </attributes>
-        <statuses>
-          <ObjectStatus id="_IDGenObjectStatus"
-            text="{EstadoLiberacion}"
-            state="{path: 'EstadoLiberacion', formatter: '.formatEstadoColor'}"/>
-        </statuses>
-      </ObjectHeader>
-        -->
       <ObjectHeader id="_IDGenObjectHeader1"
         title="Contrato {Ebeln}"
         icon="{path: 'Estado', formatter: '.formatEstadoIcon'}">
@@ -51,15 +35,6 @@
           <ObjectNumber id="_IDGenObjectNumber2" number="{Netwrpos}" unit="{Moneda}"/>
         </cells>
         </ColumnListItem>
-        <!-- 
-          <ColumnListItem id="_IDGenColumnListItem">
-            <ObjectIdentifier id="_IDGenObjectIdentifier" title="{Ebelp}"/>
-            <ObjectIdentifier id="_IDGenObjectIdentifier1" title="{Matnr}" text="{Maktx}"/>
-            <ObjectNumber id="_IDGenObjectNumber" number="{Menge}" unit="{Meins}"/>
-            <ObjectNumber id="_IDGenObjectNumber1" number="{Importe}" unit="{Moneda}"/>
-            <ObjectIdentifier id="_IDGenObjectIdentifier2" title="{Werks}"/>
-          </ColumnListItem>
-          -->
         </items>
       </Table>
 

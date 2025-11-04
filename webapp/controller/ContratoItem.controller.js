@@ -45,16 +45,33 @@ sap.ui.define([
     },
 
     onRelease: function () {
-      const oCtx = this.getView().getBindingContext();
-      if (!oCtx) return;
-      const sEbeln = oCtx.getProperty("Ebeln");
+      const oModel = this.getView().getModel(); // Modelo OData
+      const oView = this.getView();
+      
+      // Obtener el contrato actual
+      const oContext = oView.getBindingContext();
+      const sEbeln = oContext.getProperty("Ebeln");
 
-      const oModel = this.getView().getModel();
-      const oPayload = { Ebeln: sEbeln /* , Frgco: 'XX' */ };
+      // Crear la operación
+      const oEntry = {
+        Ebeln: sEbeln,
+        Accion: "LIBERAR"
+      };
 
-      oModel.create("/ReleaseActionSet", oPayload, {
-        success: () => MessageToast.show(`Contrato ${sEbeln} liberado con éxito`, { duration: 3000 }),
-        error: () => MessageToast.show("Error al liberar el contrato")
+      sap.ui.core.BusyIndicator.show(0); // Mostrar loading
+
+      oModel.create("/OperacionSet", oEntry, {
+        success: function (oData) {
+          sap.ui.core.BusyIndicator.hide();
+          sap.m.MessageToast.show(oData.Resultado || "Contrato liberado con éxito");
+          
+          // Opcional: refrescar datos de contrato
+          oModel.refresh(true);
+        },
+        error: function (oError) {
+          sap.ui.core.BusyIndicator.hide();
+          sap.m.MessageBox.error("Error al liberar el contrato");
+        }
       });
     },
 
