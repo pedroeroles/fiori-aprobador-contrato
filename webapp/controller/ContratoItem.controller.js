@@ -21,7 +21,6 @@ sap.ui.define([
       const oView = this.getView();
 
       oView.bindElement(`/ContratoSet(Ebeln='${Ebeln}')`);
-  // Bind y forzamos lectura al backend
 
       // Tabla de ítems filtrada por contrato
       const oTable = this.byId("itemsList");
@@ -65,9 +64,22 @@ sap.ui.define([
           sap.ui.core.BusyIndicator.hide();
           sap.m.MessageToast.show(oData.Resultado || "Contrato liberado con éxito");
           
-          // Opcional: refrescar datos de contrato
+          // Refrescar lista y contador
           oModel.refresh(true);
-        },
+          
+          // Leer cantidad de contratos pendientes correctamente
+          oModel.read("/ContratoSet/$count", {
+            success: function (oData2, oResponse) {
+              // Volver a la vista principal
+              const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+              oRouter.navTo("Contratos", {}, true); 
+            }.bind(this),
+            error: function () {
+              oRouter.navTo("Contratos", {}, true);
+            }
+          });
+        }.bind(this),
+
         error: function (oError) {
           sap.ui.core.BusyIndicator.hide();
           sap.m.MessageBox.error("Error al liberar el contrato");

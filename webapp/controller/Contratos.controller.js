@@ -117,7 +117,11 @@ function (Controller, MessageToast, formatter) {
         const iCount = oList.getItems().length;
         const oHeaderModel = this.getView().getModel("header");
         oHeaderModel.setProperty("/pendingCount", iCount);
+        
+        const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+        oRouter.navTo("Contratos");
       }.bind(this),
+      
         error: function (oError) {
           sap.ui.core.BusyIndicator.hide();
           sap.m.MessageBox.error("Error al liberar el contrato");
