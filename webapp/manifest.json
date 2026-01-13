@@ -5,7 +5,7 @@
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
@@ -87,16 +87,28 @@
         "clearControlAggregation": false
       },
       "routes": [
-        { "pattern": "",                 "name": "Contratos",    "target": "Contratos" },
-        { "pattern": "ContratoItem/{Ebeln}", "name": "ContratoItem", "target": "ContratoItem" }
+        {
+          "pattern": "",
+          "name": "Contratos",
+          "target": "Contratos"
+        },
+        {
+          "pattern": "ContratoItem/{Ebeln}",
+          "name": "ContratoItem",
+          "target": "ContratoItem"
+        }
       ],
       "targets": {
-        "Contratos":    { "viewName": "Contratos", "viewId": "Contratos", "viewLevel":1 },
-        "ContratoItem": { 
-            "viewName": "ContratoItem",
-            "viewId": "ContratoItem",
-            "viewLevel": 2
-         }
+        "Contratos": {
+          "viewName": "Contratos",
+          "viewId": "Contratos",
+          "viewLevel": 1
+        },
+        "ContratoItem": {
+          "viewName": "ContratoItem",
+          "viewId": "ContratoItem",
+          "viewLevel": 2
+        }
       }
     },
     "rootView": {
@@ -105,5 +117,9 @@
       "async": true,
       "id": "App"
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "aprobadoresproject2"
   }
 }

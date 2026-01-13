@@ -86,6 +86,12 @@ sap.ui.define([
         }
       });
     },
+    onGoToList: function () {
+      const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+
+      // Si querés ir a la lista "limpia" siempre:
+      oRouter.navTo("Contratos", {}, true); // true = reemplaza historial
+    },
 
     formatEstadoColor: function (s) {
       switch (s) {

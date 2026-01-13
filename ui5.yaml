@@ -18,7 +18,7 @@ server:
         backend:
           - path: /sap
             url: http://stks4hs04.eastus2.cloudapp.azure.com:8000
-            destination: Ztesis
+            destination: TesisTest
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

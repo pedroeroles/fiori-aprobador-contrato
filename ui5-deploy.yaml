@@ -4,22 +4,19 @@ specVersion: "3.1"
 metadata:
   name: aprobadores.project2
 type: application
+resources:
+  configuration:
+    propertiesFileSourceEncoding: UTF-8
 builder:
   resources:
     excludes:
       - /test/**
       - /localService/**
   customTasks:
-    - name: deploy-to-abap
+    - name: ui5-task-zipper
       afterTask: generateCachebusterInfo
       configuration:
-        target:
-          destination: Prueba
-          url: http://STKS4HS04.eastus2.cloudapp.azure.com:8000
-          client: '410'
-        app:
-          name: APROBADORES
-          package: $TMP
-          transport: ''
-        exclude:
-          - /test/
+        archiveName: aprobadoresproject2
+        relativePaths: true
+        additionalFiles:
+          - xs-app.json

@@ -42,6 +42,8 @@
       <Bar id="_IDGenBar1" design="Footer">
         <contentRight>
           <Button id="_IDGenButton" text="Liberar contrato" type="Accept" icon="sap-icon://accept" press=".onRelease"/>
+          <Button id="_IDGenButton6" text="Rechazar" type="Reject" icon="sap-icon://Reject" press=""/>
+          <Button id="_IDGenButton2" text="Ver lista de contratos" type="Transparent" icon="sap-icon://navigation-right-arrow" press=".onGoToList"/>
         </contentRight>
       </Bar>
     </content>
