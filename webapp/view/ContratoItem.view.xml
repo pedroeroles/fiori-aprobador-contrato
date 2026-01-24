@@ -11,6 +11,18 @@
           <ObjectAttribute id="_IDGenObjectAttribute2" title="Estado" text="{path: 'Estado', formatter: '.formatter.formatEstado'}"/>
         </attributes>
       </ObjectHeader>
+      
+<IconTabBar
+        id="idIconTabBar"
+        expanded="true"
+        class="sapUiResponsiveContentPadding">
+        <items>
+            
+            <IconTabFilter id="_IDGenIconTabFilter1"
+                icon="sap-icon://list"
+                text="Ítems"
+                key="items">
+                
       <!-- Ítems -->
       <Table id="itemsList" inset="false"
            items="{ path: '/ContratoItemSet' }">
@@ -37,15 +49,115 @@
         </ColumnListItem>
         </items>
       </Table>
+                
+            </IconTabFilter>
 
+            <IconTabFilter id="_IDGenIconTabFilter2"
+                icon="sap-icon://attachment"
+                text="Adjuntos"
+                key="attachments">
+                
+                <List id="_IDGenList" headerText="Documentos del Contrato">
+                    <StandardListItem id="_IDGenStandardListItem"
+                        title="Contrato_Legal_Firmado.pdf"
+                        description="Versión Final - 2MB"
+                        icon="sap-icon://pdf-attachment"
+                        type="Active"
+                        press=".onPressAttachment"/>
+                    <StandardListItem id="_IDGenStandardListItem1"
+                        title="Pliego_Tecnico.docx"
+                        description="Especificaciones - 500KB"
+                        icon="sap-icon://doc-attachment"
+                        type="Active"
+                        press=".onPressAttachment"/>
+                </List>
+                
+            </IconTabFilter>
+
+            <IconTabFilter id="_IDGenIconTabFilter3"
+                icon="sap-icon://history"
+                text="Historial"
+                key="history">
+                
+                <List id="_IDGenList1">
+                    <FeedListItem id="_IDGenFeedListItem"
+                        sender="Pedro Eroles"
+                        icon="sap-icon://employee"
+                        info="Creador"
+                        timestamp="Hace 2 días"
+                        text="El contrato ha sido creado y enviado para aprobación."/>
+                    <FeedListItem id="_IDGenFeedListItem1"
+                        sender="Sistema SAP"
+                        icon="sap-icon://it-system"
+                        info="Automático"
+                        timestamp="Hace 2 días"
+                        text="Verificación de presupuesto correcta."/>
+                </List>
+
+            </IconTabFilter>
+
+        </items>
+    </IconTabBar>
+
+      <!-- Ítems
+      <Table id="itemsList" inset="false"
+           items="{ path: '/ContratoItemSet' }">
+        <columns>
+          <Column id="_IDGenColumn"><Text id="_IDGenText1" text="Pos"/></Column>
+          <Column id="_IDGenColumn1"><Text id="_IDGenText4" text="Material"/></Column>
+          <Column id="_IDGenColumn6"><Text id="_IDGenText12" text="Descripción"/></Column>
+          <Column id="_IDGenColumn2"><Text id="_IDGenText5" text="Cantidad"/></Column>
+          <Column id="_IDGenColumn5"><Text id="_IDGenText7" text="UM"/></Column>
+          <Column id="_IDGenColumn7"><Text id="_IDGenText13" text="Precio"/></Column>
+          <Column id="_IDGenColumn3"><Text id="_IDGenText6" text="Importe"/></Column>
+        </columns>
+        <items>
+        <ColumnListItem id="_IDGenColumnListItem1">
+          <cells>
+          <Text id="_IDGenText8" text="{Ebelp}"/>
+          <Text id="_IDGenText9" text="{Matnr}"/>
+          <Text id="_IDGenText10" text="{Txz01}"/>
+          <ObjectNumber id="_IDGenObjectNumber" number="{Menge}" unit="{Meins}"/>
+          <Text id="_IDGenText11" text="{Meins}"/>
+          <ObjectNumber id="_IDGenObjectNumber1" number="{Netpr}" unit="{Moneda}"/>
+          <ObjectNumber id="_IDGenObjectNumber2" number="{Netwrpos}" unit="{Moneda}"/>
+        </cells>
+        </ColumnListItem>
+        </items>
+      </Table>
+
+      -->
       <!-- Acción principal -->
+      <!--
       <Bar id="_IDGenBar1" design="Footer">
         <contentRight>
-          <Button id="_IDGenButton" text="Liberar contrato" type="Accept" icon="sap-icon://accept" press=".onRelease"/>
+           <Button id="_IDGenButton" text="Liberar contrato" type="Accept" icon="sap-icon://accept" press=".onRelease"/>
           <Button id="_IDGenButton6" text="Rechazar" type="Reject" icon="sap-icon://Reject" press=""/>
-          <Button id="_IDGenButton2" text="Ver lista de contratos" type="Transparent" icon="sap-icon://navigation-right-arrow" press=".onGoToList"/>
         </contentRight>
       </Bar>
+        -->
     </content>
+    <footer>
+        <OverflowToolbar id="_IDGenOverflowToolbar2">
+            <ToolbarSpacer id="_IDGenToolbarSpacer"/> <Button id="_IDGenButton1" 
+                text="Rechazar" 
+                type="Reject" 
+                icon="sap-icon://decline" 
+                press=".onRelease"/>
+            
+            <Button id="_IDGenButton7" 
+                text="Liberar Contrato" 
+                type="Accept" 
+                icon="sap-icon://accept" 
+                press=".onApproveContract"/>
+
+            
+            <Button id="_IDGenButton2" 
+              text="Ver lista de contratos" 
+              type="Transparent" 
+              icon="sap-icon://navigation-right-arrow" 
+              press=".onGoToList"/>
+        </OverflowToolbar>
+    </footer>
   </Page>
 </mvc:View>
