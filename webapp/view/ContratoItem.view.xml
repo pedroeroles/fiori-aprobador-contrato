@@ -50,51 +50,28 @@
         </items>
       </Table>
                 
-            </IconTabFilter>
+        </IconTabFilter>
 
-            <IconTabFilter id="_IDGenIconTabFilter2"
-                icon="sap-icon://attachment"
-                text="Adjuntos"
-                key="attachments">
-                
-                <List id="_IDGenList" headerText="Documentos del Contrato">
-                    <StandardListItem id="_IDGenStandardListItem"
-                        title="Contrato_Legal_Firmado.pdf"
-                        description="Versión Final - 2MB"
-                        icon="sap-icon://pdf-attachment"
-                        type="Active"
-                        press=".onPressAttachment"/>
-                    <StandardListItem id="_IDGenStandardListItem1"
-                        title="Pliego_Tecnico.docx"
-                        description="Especificaciones - 500KB"
-                        icon="sap-icon://doc-attachment"
-                        type="Active"
-                        press=".onPressAttachment"/>
-                </List>
-                
-            </IconTabFilter>
+          <IconTabFilter id="_IDGenIconTabFilter2" icon="sap-icon://attachment" text="Adjuntos" key="attachments">
+              <List id="_IDGenList" items="{aux>/Adjuntos}"> <StandardListItem id="_IDGenStandardListItem"
+                      title="{aux>Nombre}"
+                      description="{aux>Info}"
+                      icon="{aux>Icon}"
+                      type="Active"
+                      press=".onPressAttachment"/>
+              </List>
+          </IconTabFilter>
 
-            <IconTabFilter id="_IDGenIconTabFilter3"
-                icon="sap-icon://history"
-                text="Historial"
-                key="history">
-                
-                <List id="_IDGenList1">
-                    <FeedListItem id="_IDGenFeedListItem"
-                        sender="Pedro Eroles"
-                        icon="sap-icon://employee"
-                        info="Creador"
-                        timestamp="Hace 2 días"
-                        text="El contrato ha sido creado y enviado para aprobación."/>
-                    <FeedListItem id="_IDGenFeedListItem1"
-                        sender="Sistema SAP"
-                        icon="sap-icon://it-system"
-                        info="Automático"
-                        timestamp="Hace 2 días"
-                        text="Verificación de presupuesto correcta."/>
-                </List>
-
-            </IconTabFilter>
+      <IconTabFilter id="_IDGenIconTabFilter3" icon="sap-icon://history" text="Historial" key="history">
+          <List id="_IDGenList1" items="{aux>/Historial}">
+              <FeedListItem id="_IDGenFeedListItem"
+                  sender="{aux>Autor}"
+                  icon="{aux>Icon}"
+                  info="Info"
+                  timestamp="{aux>Fecha}"
+                  text="{aux>Texto}"/>
+          </List>
+      </IconTabFilter>
 
         </items>
     </IconTabBar>
@@ -143,13 +120,13 @@
                 text="Rechazar" 
                 type="Reject" 
                 icon="sap-icon://decline" 
-                press=".onRelease"/>
+                press=".onReject"/>
             
             <Button id="_IDGenButton7" 
                 text="Liberar Contrato" 
                 type="Accept" 
                 icon="sap-icon://accept" 
-                press=".onApproveContract"/>
+                press=".onRelease"/>
 
             
             <Button id="_IDGenButton2" 
