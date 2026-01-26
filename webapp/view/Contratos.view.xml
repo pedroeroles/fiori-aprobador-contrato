@@ -39,7 +39,10 @@
       <!-- Lista principal -->
       <List id="listContratos" mode="SingleSelectMaster" items="{
             path: '/ContratoSet'
-          }">
+          }"
+            growing="true"
+            growingThreshold="10"
+            growingScrollToLoad="false">
         <ObjectListItem id="_IDGenObjectListItem"
           title="Contrato {Ebeln}"
           number="{MontoTotal}"
