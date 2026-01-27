@@ -42,27 +42,35 @@
           }"
             growing="true"
             growingThreshold="10"
-            growingScrollToLoad="false">
-        <ObjectListItem id="_IDGenObjectListItem"
-          title="Contrato {Ebeln}"
-          number="{MontoTotal}"
-          numberUnit="{Moneda}"
-          type="Active"
-          press=".onItemPress"
-          >
-          <firstStatus>
-            <ObjectStatus id="_IDGenObjectStatus2"
-              text="{path: 'Estado', formatter: '.formatter.formatEstado'}"
-              state="{path: 'Estado', formatter: '.formatter.formatEstadoColor'}"/>
-          </firstStatus>
-          <secondStatus>
-            <ObjectStatus id="_IDGenObjectStatus3" text="{Proveedor}"/>
-          </secondStatus>
-            <attributes>
-              <ObjectAttribute id="_IDGenObjectAttribute3" title="Proveedor" text="{Lifnr} {Name1}"/>
-              <ObjectAttribute id="_IDGenObjectAttribute4" title="Estado" text="{path: 'Estado', formatter: '.formatter.formatEstado'}"/>
-            </attributes>
-        </ObjectListItem>
+            growingScrollToLoad="false"
+            >
+ <ObjectListItem 
+    id="contractListItem"
+    title="Contrato {Ebeln}"
+    number="{MontoTotal}"
+    numberUnit="{Moneda}"
+    type="Active"
+    press=".onItemPress">
+    <attributes>
+        <ObjectAttribute id="providerAttr" title="Proveedor" text="{Name1} ({Lifnr})"/>
+    </attributes>
+    <firstStatus>
+        <ObjectStatus 
+            id="statusState"
+            text="{path: 'Estado', formatter: '.formatter.formatEstado'}"
+            state="{path: 'Estado', formatter: '.formatter.formatEstadoColor'}"/>
+    </firstStatus>
+    <secondStatus>
+            <ObjectStatus id="secondStatus" 
+                text="{
+                    path: 'Kdatb',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: { style: 'medium' } 
+                }"
+                state="{path: 'Kdatb', formatter: '.formatter.formatFechaCritica'}"
+                icon="sap-icon://history" />
+        </secondStatus>
+</ObjectListItem>
       </List>
     </content>
     </Page>
